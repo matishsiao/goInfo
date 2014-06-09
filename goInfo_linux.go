@@ -25,5 +25,6 @@ func GetInfo() *GoInfoObject {
 	gio.Core = osInfo[1]
 	gio.Platform = osInfo[2]
 	gio.OS = osInfo[3]
+	gio.Hostname,_ := os.Hostname()	
 	return gio
 }

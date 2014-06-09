@@ -9,6 +9,7 @@ type GoInfoObject struct {
 	Core string
 	Platform string
 	OS string
+	Hostname string
 }
 
 func (gi *GoInfoObject) VarDump() {
@@ -16,5 +17,6 @@ func (gi *GoInfoObject) VarDump() {
 	fmt.Println("Core:",gi.Core)
 	fmt.Println("Platform:",gi.Platform)
 	fmt.Println("OS:",gi.OS)
+	fmt.Println("Hostname:",gi.Hostname)
 }
 
