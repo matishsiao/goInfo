@@ -9,8 +9,8 @@ import (
 )
 
 func GetInfo() *GoInfoObject {			
-	cmd := exec.Command("uname","-srio")
-	cmd.Stdin = strings.NewReader("some input")
+	cmd := exec.Command("uname","-srm")
+	cmd.Stdin = strings.NewReader("infoInput")
 	var out bytes.Buffer
 	var stderr bytes.Buffer
 	cmd.Stdout = &out
@@ -22,7 +22,7 @@ func GetInfo() *GoInfoObject {
 	osStr := strings.Replace(out.String(),"\n","",-1)
 	osStr = strings.Replace(osStr,"\r\n","",-1)
 	osInfo := strings.Split(osStr," ")
-	gio := &GoInfoObject{Kernel:osInfo[0],Core:osInfo[1],Platform:osInfo[2],OS:osInfo[3],GoOS:runtime.GOOS,CPUs:runtime.NumCPU()}
+	gio := &GoInfoObject{Kernel:osInfo[0],Core:osInfo[1],Platform:osInfo[2],OS:osInfo[0],GoOS:runtime.GOOS,CPUs:runtime.NumCPU()}	
 	gio.Hostname,_ = os.Hostname()	
 	return gio
 }

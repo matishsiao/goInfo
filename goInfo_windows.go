@@ -29,14 +29,7 @@ func GetInfo() *GoInfoObject {
 	} else {
 		ver = osStr[tmp1+9:tmp2]
 	}
-	
-	gio := new(GoInfoObject)
-	gio.GoOS = runtime.GOOS
-	gio.Kernel = "windows"
-	gio.Core = ver
-	gio.Platform = "unknown"
-	gio.OS = "windows"
-	gio.CPUs = runtime.NumCPU()
+	gio := &GoInfoObject{Kernel:"windows",Core:ver,Platform:"unknown",OS:"windows",GoOS:runtime.GOOS,CPUs:runtime.NumCPU()}	
 	gio.Hostname,_ = os.Hostname()	
 	return gio
 }

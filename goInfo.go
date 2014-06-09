@@ -2,6 +2,7 @@ package goInfo
 
 import (
 	"fmt"
+	"runtime"
 )
 
 type GoInfoObject struct {
