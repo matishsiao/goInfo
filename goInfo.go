@@ -2,7 +2,6 @@ package goInfo
 
 import (
 	"fmt"
-	"runtime"
 )
 
 type GoInfoObject struct {
@@ -25,3 +24,6 @@ func (gi *GoInfoObject) VarDump() {
 	fmt.Println("CPUs:",gi.CPUs)
 }
 
+func (gi *GoInfoObject) String() string {
+	return fmt.Sprintf("GoOS:%v,Kernel:%v,Core:%v,Platform:%v,OS:%v,Hostname:%v,CPUs:%v",gi.GoOS,gi.Kernel,gi.Core,gi.Platform,gi.OS,gi.Hostname,gi.CPUs)
+}
