@@ -10,7 +10,9 @@ version:0.0.1
 
 ## Futures
 
-N/A
+get linux information
+get windows information
+get osx information
   
   
 ## Install:
