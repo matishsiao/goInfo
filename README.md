@@ -11,7 +11,9 @@ version:0.0.1
 ## Futures
 
 get linux information
+
 get windows information
+
 get osx information
   
   
