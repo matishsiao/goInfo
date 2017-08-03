@@ -15,6 +15,8 @@ get linux information
 get windows information
 
 get osx information
+
+get freebsd information
   
   
 ## Install:
