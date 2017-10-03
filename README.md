@@ -54,8 +54,7 @@ get freebsd information
 }
 ```
 
-It's will show:
-
+On Linux:
 ```sh
    GoOS: linux
    Kernel: Linux
@@ -64,6 +63,16 @@ It's will show:
    OS: GNU/Linux
    Hostname: ubuntu
    CPUs: 1
+```
+On Windows:
+```sh
+   GoOS: windows
+   Kernel: windows
+   Core: 10.0.15063 N/A Build 15063
+   Platform: x64-based PC
+   OS: Microsoft Windows 10 Pro
+   Hostname: windows10
+   CPUs: 4
 ```
 
 ##License and Copyright
