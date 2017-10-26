@@ -51,8 +51,29 @@ get freebsd information
 		gi := goInfo.GetInfo()
 		gi.VarDump()
 	 }
+
+```
+Get Linux Distribution version
+```sh
+package main
+import (
+     "github.com/pyToshka/goInfo"
+)
+
+func main() {
+    dist :=goInfo.GetInfo().Distribution
+    print(dist)
+
+
 }
 ```
+Return
+```sh
+ubuntu@ubuntu-xenial:/tmp$
+16.04
+```
+
+
 
 It's will show:
 
@@ -64,6 +85,7 @@ It's will show:
    OS: GNU/Linux
    Hostname: ubuntu
    CPUs: 1
+   Distribution version: 16.04
 ```
 
 ##License and Copyright

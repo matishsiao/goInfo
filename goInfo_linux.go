@@ -20,7 +20,8 @@ func GetInfo() *GoInfoObject {
 	osStr = strings.Replace(osStr,"\r\n","",-1)
 	osInfo := strings.Split(osStr," ")
 	gio := &GoInfoObject{Kernel:osInfo[0],Core:osInfo[1],Platform:osInfo[2],OS:osInfo[3],GoOS:runtime.GOOS,CPUs:runtime.NumCPU()}
-	gio.Hostname,_ = os.Hostname()	
+	gio.Hostname,_ = os.Hostname()
+	gio.Distribution=_LinuxDist()
 	return gio
 }
 
@@ -32,8 +33,21 @@ func _getInfo() string {
 	cmd.Stdout = &out
 	cmd.Stderr = &stderr
 	err := cmd.Run()
-	if err != nil {							
+	if err != nil {
 		fmt.Println("getInfo:",err)	
+	}
+	return out.String()
+}
+func _LinuxDist() string  {
+	dist:=exec.Command("sh", "-c"," cat /etc/*-release|egrep \"DISTRIB_RELEASE|REDHAT_SUPPORT_PRODUCT_VERSION\"|sed 's/DISTRIB_RELEASE=//g'|sed 's/REDHAT_SUPPORT_PRODUCT_VERSION=//g'|sed 's/\"//g'")
+	dist.Stdin = strings.NewReader("some input")
+	var out bytes.Buffer
+	var stderr bytes.Buffer
+	dist.Stdout = &out
+	dist.Stderr = &stderr
+	err := dist.Run()
+	if err != nil {
+		fmt.Println("getInfo:",err)
 	}
 	return out.String()
 }
