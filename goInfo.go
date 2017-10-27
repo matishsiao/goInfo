@@ -13,6 +13,7 @@ type GoInfoObject struct {
 	Hostname string
 	CPUs int
 	Distribution string
+	Name string
 }
 
 func (gi *GoInfoObject) VarDump() {
@@ -25,11 +26,17 @@ func (gi *GoInfoObject) VarDump() {
 	fmt.Println("CPUs:",gi.CPUs)
 	if gi.Kernel =="Linux"{
 		fmt.Println("Distribution version:", gi.Distribution)
+		fmt.Println("Distribution name:", gi.Name)
 	}
 }
 func (gi *GoInfoObject) Dist() {
 	if gi.Kernel =="Linux"{
 		fmt.Println("Distribution version:", gi.Distribution)
+	}
+}
+func (gi *GoInfoObject) DistName() {
+	if gi.Kernel =="Linux"{
+		fmt.Println("Distribution name:", gi.Name)
 	}
 }
 func (gi *GoInfoObject) String() string {

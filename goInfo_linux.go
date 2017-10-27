@@ -22,6 +22,7 @@ func GetInfo() *GoInfoObject {
 	gio := &GoInfoObject{Kernel:osInfo[0],Core:osInfo[1],Platform:osInfo[2],OS:osInfo[3],GoOS:runtime.GOOS,CPUs:runtime.NumCPU()}
 	gio.Hostname,_ = os.Hostname()
 	gio.Distribution=_LinuxDist()
+	gio.Name=_Disname()
 	return gio
 }
 
@@ -39,13 +40,26 @@ func _getInfo() string {
 	return out.String()
 }
 func _LinuxDist() string  {
-	dist:=exec.Command("sh", "-c"," cat /etc/*-release|egrep \"DISTRIB_RELEASE|REDHAT_SUPPORT_PRODUCT_VERSION\"|sed 's/DISTRIB_RELEASE=//g'|sed 's/REDHAT_SUPPORT_PRODUCT_VERSION=//g'|sed 's/\"//g'")
+	dist:=exec.Command("sh", "-c"," cat /etc/*-release|egrep \"DISTRIB_RELEASE|REDHAT_SUPPORT_PRODUCT_VERSION\"|sed 's/DISTRIB_RELEASE=//g'|sed 's/REDHAT_SUPPORT_PRODUCT_VERSION=//g'|sed 's/\"//g'|tr -d '\n'")
 	dist.Stdin = strings.NewReader("some input")
 	var out bytes.Buffer
 	var stderr bytes.Buffer
 	dist.Stdout = &out
 	dist.Stderr = &stderr
 	err := dist.Run()
+	if err != nil {
+		fmt.Println("getInfo:",err)
+	}
+	return out.String()
+}
+func _Disname() string  {
+	name:=exec.Command("sh", "-c","cat /etc/*-release|egrep \"^ID=\"|sed 's/ID=//g'|sed 's/\"//g'| tr '[A-Z]' '[a-z]'|tr -d '\n'")
+	name.Stdin = strings.NewReader("some input")
+	var out bytes.Buffer
+	var stderr bytes.Buffer
+	name.Stdout = &out
+	name.Stderr = &stderr
+	err := name.Run()
 	if err != nil {
 		fmt.Println("getInfo:",err)
 	}

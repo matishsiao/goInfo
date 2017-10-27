@@ -73,19 +73,38 @@ ubuntu@ubuntu-xenial:/tmp$
 16.04
 ```
 
+Get Linux Distribution name
+```sh
+package main
+import (
+     "github.com/pyToshka/goInfo"
+)
 
+func main() {
+	dist :=goInfo.GetInfo().Name
+	print(dist)
+
+
+}
+```
+Return
+```sh
+[vagrant@localhost tmp]$
+centos
+```
 
 It's will show:
 
 ```sh
    GoOS: linux
    Kernel: Linux
-   Core: 3.13.0-27-generic
+   Core: 3.10.0-693.2.1.el7.x86_64
    Platform: x86_64
    OS: GNU/Linux
-   Hostname: ubuntu
+   Hostname: localhost.localdomain
    CPUs: 1
-   Distribution version: 16.04
+   Distribution version: 7
+   Distribution name: centos
 ```
 
 ##License and Copyright
