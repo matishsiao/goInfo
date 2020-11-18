@@ -26,7 +26,7 @@ get freebsd information
 ```
 
 ## Struct:
-```sh
+```go
   type GoInfoObject struct {
 	GoOS string
 	Kernel string
@@ -40,7 +40,7 @@ get freebsd information
 
 ## Example:
 
-```sh   
+```go   
    package main
 
    import (
@@ -51,7 +51,6 @@ get freebsd information
 		gi := goInfo.GetInfo()
 		gi.VarDump()
 	 }
-}
 ```
 
 It's will show:
