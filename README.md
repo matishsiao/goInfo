@@ -19,6 +19,8 @@ get osx information
 get freebsd information
 
 get netbsd information
+
+get openbsd information
   
   
 ## Install:
