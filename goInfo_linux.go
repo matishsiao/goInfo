@@ -10,10 +10,10 @@ import (
 	"time"
 )
 
-func GetInfo() *GoInfoObject {
-	out := _getInfo()
+func GetInfo() (*GoInfoObject, error) {
+	out, err := _getInfo()
 	for strings.Index(out, "broken pipe") != -1 {
-		out = _getInfo()
+		out, err = _getInfo()
 		time.Sleep(500 * time.Millisecond)
 	}
 	osStr := strings.Replace(out, "\n", "", -1)
@@ -21,10 +21,10 @@ func GetInfo() *GoInfoObject {
 	osInfo := strings.Split(osStr, " ")
 	gio := &GoInfoObject{Kernel: osInfo[0], Core: osInfo[1], Platform: osInfo[2], OS: osInfo[3], GoOS: runtime.GOOS, CPUs: runtime.NumCPU()}
 	gio.Hostname, _ = os.Hostname()
-	return gio
+	return gio, err
 }
 
-func _getInfo() string {
+func _getInfo() (string, error) {
 	cmd := exec.Command("uname", "-srio")
 	cmd.Stdin = strings.NewReader("some input")
 	var out bytes.Buffer
@@ -32,8 +32,5 @@ func _getInfo() string {
 	cmd.Stdout = &out
 	cmd.Stderr = &stderr
 	err := cmd.Run()
-	if err != nil {
-		fmt.Println("getInfo:", err)
-	}
-	return out.String()
+	return out.String(), err
 }

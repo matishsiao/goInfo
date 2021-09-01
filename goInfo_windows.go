@@ -2,13 +2,14 @@ package goInfo
 
 import (
 	"bytes"
+	"fmt"
 	"os"
 	"os/exec"
 	"runtime"
 	"strings"
 )
 
-func GetInfo() *GoInfoObject {
+func GetInfo() (*GoInfoObject, error) {
 	cmd := exec.Command("cmd", "ver")
 	cmd.Stdin = strings.NewReader("some input")
 	var out bytes.Buffer
@@ -17,7 +18,7 @@ func GetInfo() *GoInfoObject {
 	cmd.Stderr = &stderr
 	err := cmd.Run()
 	if err != nil {
-		panic(err)
+		return nil, fmt.Errorf("getInfo: %s", err)
 	}
 	osStr := strings.Replace(out.String(), "\n", "", -1)
 	osStr = strings.Replace(osStr, "\r\n", "", -1)
@@ -31,5 +32,5 @@ func GetInfo() *GoInfoObject {
 	}
 	gio := &GoInfoObject{Kernel: "windows", Core: ver, Platform: "unknown", OS: "windows", GoOS: runtime.GOOS, CPUs: runtime.NumCPU()}
 	gio.Hostname, _ = os.Hostname()
-	return gio
+	return gio, nil
 }
