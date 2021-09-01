@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-func GetInfo() (*GoInfoObject, error) {
+func GetInfo() (GoInfoObject, error) {
 	cmd := exec.Command("cmd", "ver")
 	cmd.Stdin = strings.NewReader("some input")
 	var out bytes.Buffer
@@ -18,7 +18,8 @@ func GetInfo() (*GoInfoObject, error) {
 	cmd.Stderr = &stderr
 	err := cmd.Run()
 	if err != nil {
-		return nil, fmt.Errorf("getInfo: %s", err)
+		gio := GoInfoObject{Kernel: "windows", Core: "unknown", Platform: "unknown", OS: "windows", GoOS: runtime.GOOS, CPUs: runtime.NumCPU(), Hostname: os.Hostname()}
+		return gio, fmt.Errorf("getInfo: %s", err)
 	}
 	osStr := strings.Replace(out.String(), "\n", "", -1)
 	osStr = strings.Replace(osStr, "\r\n", "", -1)
@@ -30,7 +31,6 @@ func GetInfo() (*GoInfoObject, error) {
 	} else {
 		ver = osStr[tmp1+9 : tmp2]
 	}
-	gio := &GoInfoObject{Kernel: "windows", Core: ver, Platform: "unknown", OS: "windows", GoOS: runtime.GOOS, CPUs: runtime.NumCPU()}
-	gio.Hostname, _ = os.Hostname()
+	gio := GoInfoObject{Kernel: "windows", Core: ver, Platform: "unknown", OS: "windows", GoOS: runtime.GOOS, CPUs: runtime.NumCPU(), Hostname: os.Hostname()}
 	return gio, nil
 }
