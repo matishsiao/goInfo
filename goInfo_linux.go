@@ -2,7 +2,6 @@ package goInfo
 
 import (
 	"bytes"
-	"fmt"
 	"os"
 	"os/exec"
 	"runtime"
