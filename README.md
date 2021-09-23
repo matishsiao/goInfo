@@ -26,7 +26,7 @@ get freebsd information
 ```
 
 ## Struct:
-```sh
+```go
   type GoInfoObject struct {
 	GoOS string
 	Kernel string
@@ -40,7 +40,7 @@ get freebsd information
 
 ## Example:
 
-```sh   
+```go   
    package main
 
    import (
@@ -56,7 +56,7 @@ get freebsd information
 
 It's will show:
 
-```sh
+```
    GoOS: linux
    Kernel: Linux
    Core: 3.13.0-27-generic
