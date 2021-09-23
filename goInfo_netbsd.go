@@ -18,7 +18,7 @@ func GetInfo() (GoInfoObject, error) {
 	osStr := strings.Replace(out, "\n", "", -1)
 	osStr = strings.Replace(osStr, "\r\n", "", -1)
 	osInfo := strings.Split(osStr, " ")
-	gio := GoInfoObject{Kernel: osInfo[0], Core: osInfo[1], Platform: osInfo[2], OS: osInfo[0], GoOS: runtime.GOOS, CPUs: runtime.NumCPU()}
+	gio := GoInfoObject{Kernel: osInfo[0], Core: osInfo[1], Platform: runtime.GOARCH, OS: osInfo[2], GoOS: runtime.GOOS, CPUs: runtime.NumCPU()}
 	gio.Hostname, _ = os.Hostname()
 	return gio, err
 }
