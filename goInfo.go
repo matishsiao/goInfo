@@ -5,6 +5,7 @@ import (
 )
 
 type GoInfoObject struct {
+	GoARCH   string
 	GoOS     string
 	Kernel   string
 	Core     string
@@ -15,6 +16,7 @@ type GoInfoObject struct {
 }
 
 func (gi *GoInfoObject) VarDump() {
+	fmt.Println("GoARCH:", gi.GoARCH)
 	fmt.Println("GoOS:", gi.GoOS)
 	fmt.Println("Kernel:", gi.Kernel)
 	fmt.Println("Core:", gi.Core)
@@ -25,5 +27,5 @@ func (gi *GoInfoObject) VarDump() {
 }
 
 func (gi *GoInfoObject) String() string {
-	return fmt.Sprintf("GoOS:%v,Kernel:%v,Core:%v,Platform:%v,OS:%v,Hostname:%v,CPUs:%v", gi.GoOS, gi.Kernel, gi.Core, gi.Platform, gi.OS, gi.Hostname, gi.CPUs)
+	return fmt.Sprintf("GoARCH:%s,GoOS:%v,Kernel:%v,Core:%v,Platform:%v,OS:%v,Hostname:%v,CPUs:%v", gi.GoARCH, gi.GoOS, gi.Kernel, gi.Core, gi.Platform, gi.OS, gi.Hostname, gi.CPUs)
 }
