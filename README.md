@@ -28,6 +28,7 @@ get freebsd information
 ## Struct:
 ```go
   type GoInfoObject struct {
+	GoARCH string
 	GoOS string
 	Kernel string
 	Core string
@@ -57,6 +58,7 @@ get freebsd information
 It's will show:
 
 ```
+   GoARCH: amd64
    GoOS: linux
    Kernel: Linux
    Core: 3.13.0-27-generic

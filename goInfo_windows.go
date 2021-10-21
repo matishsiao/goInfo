@@ -18,7 +18,7 @@ func GetInfo() (GoInfoObject, error) {
 	cmd.Stderr = &stderr
 	err := cmd.Run()
 	if err != nil {
-		gio := GoInfoObject{Kernel: "windows", Core: "unknown", Platform: "unknown", OS: "windows", GoOS: runtime.GOOS, CPUs: runtime.NumCPU()}
+		gio := GoInfoObject{Kernel: "windows", Core: "unknown", Platform: "unknown", OS: "windows", GoARCH: runtime.GOARCH, GoOS: runtime.GOOS, CPUs: runtime.NumCPU()}
 		gio.Hostname, _ = os.Hostname()
 		return gio, fmt.Errorf("getInfo: %s", err)
 	}
