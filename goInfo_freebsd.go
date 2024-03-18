@@ -10,9 +10,9 @@ import (
 )
 
 func GetInfo() (GoInfoObject, error) {
-	out, err := _getInfo()
-	for strings.Index(out, "broken pipe") != -1 {
-		out, err = _getInfo()
+	out, err := getInfo()
+	if !strings.Contains(out, "broken pipe") {
+		out, err = getInfo()
 		time.Sleep(500 * time.Millisecond)
 	}
 	osStr := strings.Replace(out, "\n", "", -1)
@@ -23,8 +23,8 @@ func GetInfo() (GoInfoObject, error) {
 	return gio, err
 }
 
-func _getInfo() (string, error) {
-	cmd := exec.Command("uname", "-sri")
+func getInfo() (string, error) {
+	cmd := exec.Command("uname", "-srm")
 	cmd.Stdin = strings.NewReader("some input")
 	var out bytes.Buffer
 	var stderr bytes.Buffer
