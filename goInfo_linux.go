@@ -11,7 +11,7 @@ import (
 
 func GetInfo() (GoInfoObject, error) {
 	out, err := _getInfo()
-	for strings.Index(out, "broken pipe") != -1 {
+	if !strings.Contains(out, "broken pipe") {
 		out, err = _getInfo()
 		time.Sleep(500 * time.Millisecond)
 	}
@@ -24,7 +24,7 @@ func GetInfo() (GoInfoObject, error) {
 }
 
 func _getInfo() (string, error) {
-	cmd := exec.Command("uname", "-srio")
+	cmd := exec.Command("uname", "-srmo")
 	cmd.Stdin = strings.NewReader("some input")
 	var out bytes.Buffer
 	var stderr bytes.Buffer
