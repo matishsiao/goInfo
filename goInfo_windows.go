@@ -24,7 +24,7 @@ func GetInfo() (GoInfoObject, error) {
 	}
 	osStr := strings.Replace(out.String(), "\n", "", -1)
 	osStr = strings.Replace(osStr, "\r\n", "", -1)
-	containsBrackVersion := strings.Contains(osStr, "[Version") {
+	containsBrackVersion := strings.Contains(osStr, "[Version")
 	containsClosingBracket := strings.Contains(osStr, "]")
 	var ver string
 	if !containsBrackVersion || !containsClosingBracket {
