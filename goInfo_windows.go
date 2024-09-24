@@ -18,7 +18,7 @@ func GetInfo() (GoInfoObject, error) {
 	cmd.Stderr = &stderr
 	err := cmd.Run()
 	if err != nil {
-		gio := GoInfoObject{Kernel: "windows", Core: "unknown", Platform: "unknown", OS: "windows", GoOS: runtime.GOOS, CPUs: runtime.NumCPU()}
+		gio := GoInfoObject{Kernel: "windows", Core: "unknown", Platform: platform(), OS: "windows", GoOS: runtime.GOOS, CPUs: runtime.NumCPU()}
 		gio.Hostname, _ = os.Hostname()
 		return gio, fmt.Errorf("getInfo: %s", err)
 	}
@@ -32,7 +32,20 @@ func GetInfo() (GoInfoObject, error) {
 	} else {
 		ver = osStr[tmp1+9 : tmp2]
 	}
-	gio := GoInfoObject{Kernel: "windows", Core: ver, Platform: "unknown", OS: "windows", GoOS: runtime.GOOS, CPUs: runtime.NumCPU()}
+	gio := GoInfoObject{Kernel: "windows", Core: ver, Platform: platform(), OS: "windows", GoOS: runtime.GOOS, CPUs: runtime.NumCPU()}
 	gio.Hostname, _ = os.Hostname()
 	return gio, nil
+}
+
+func platform() string {
+	p := runtime.GOARCH
+	switch p {
+	case "386":
+		return "i386"
+	case "amd64":
+		return "x86_64"
+	default:
+		return p
+
+	}
 }
