@@ -48,7 +48,7 @@ get freebsd information
    )
 
    func main() {
-		gi := goInfo.GetInfo()
+		gi, _ := goInfo.GetInfo()
 		gi.VarDump()
 	 }
 }
