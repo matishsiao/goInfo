@@ -22,15 +22,16 @@ func GetInfo() (GoInfoObject, error) {
 		gio.Hostname, _ = os.Hostname()
 		return gio, fmt.Errorf("getInfo: %s", err)
 	}
-	osStr := strings.Replace(out.String(), "\n", "", -1)
-	osStr = strings.Replace(osStr, "\r\n", "", -1)
-	tmp1 := strings.Index(osStr, "[Version")
-	tmp2 := strings.Index(osStr, "]")
-	var ver string
-	if tmp1 == -1 || tmp2 == -1 {
-		ver = "unknown"
-	} else {
-		ver = osStr[tmp1+9 : tmp2]
+	ver := "unknown"
+	outStr := out.String()
+	if strings.Contains(outStr, "[") {
+		parts := strings.Split(strings.ReplaceAll(outStr, "\r\n\t", ""), "[")
+		if len(parts) >= 2 {
+			x := parts[1]
+			x = strings.Split(x, "]")[0]
+			parts = strings.Split(x, " ")
+			ver = parts[len(parts)-1]
+		}
 	}
 	gio := GoInfoObject{Kernel: "windows", Core: ver, Platform: platform(), OS: "windows", GoOS: runtime.GOOS, CPUs: runtime.NumCPU()}
 	gio.Hostname, _ = os.Hostname()
